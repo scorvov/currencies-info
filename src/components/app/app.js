@@ -3,6 +3,7 @@ import { apiService } from "../../services/api-service";
 import { abbreviationCurrency, getRatesForCurrency } from "../../utils/helpers";
 import { Header } from "../header/header";
 import { Convert } from "../convert/convert";
+import "../../assests/styles/app.scss";
 
 class App extends Component {
   state = {
@@ -56,7 +57,8 @@ class App extends Component {
   render() {
     const { currency1, currency2, amount1, amount2, currencies } = this.state;
     return (
-      <>
+      <div className={"app"}>
+        <h1 className={"title"}>Exchange Rates</h1>
         <Header
           currency1={currency1}
           currency2={currency2}
@@ -72,7 +74,7 @@ class App extends Component {
             onChange={this.handleChangeFrom}
           />
         )}
-      </>
+      </div>
     );
   }
 }

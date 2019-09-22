@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css?family=Be+Vietnam:400,700&display=swap');
+@import '_myVariables';
+
+body {
+  background: $background-app;
+}
+* {
+  text-transform: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  color: $text-color;
+  box-sizing: border-box;
+}
+
+.app {
+  max-width: 960px;
+  min-width: 360px;
+  margin-top: 74px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 35px;
+  background: #fff73d;
+  border-radius: 10px;
+}
+
+.title {
+  text-align: center;
+}
+.app-header {
+  margin-top: 30px;
+  max-height: 100px;
+  margin-bottom: 5px;
+  padding: 10px;
+  border: 1px solid $text-color;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.convert {
+  max-height: 100px;
+  padding: 0 10px;
+  border: 1px solid $text-color;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-group{
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  align-items: center;
+  margin: 15px 10px;
+  &_label {
+    width: 120px;
+    font-weight: bold;
+  }
+  &_input {
+    @extend %input;
+  }
+}
