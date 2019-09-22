@@ -9,31 +9,38 @@ class App extends Component {
   state = {
     currency1: "",
     currency2: "",
-    ratesForUSD: {},
+    ratesForUSD: null,
     ratesFor1: {},
     ratesFor2: {},
     amount1: 0,
     amount2: 0,
-    currencies: {}
+    currencies: null
   };
 
   async componentDidMount() {
     const currencies = await apiService.getCurrencies();
+    currencies && this.setState({ currencies });
     const ratesForUSD = await apiService.getRates();
-    this.setState({ currencies, ratesForUSD });
+    ratesForUSD && this.setState({ ratesForUSD });
   }
   componentDidUpdate(prevProps, prevState, snapshot) {
     const { currency1, currency2, ratesForUSD, currencies } = this.state;
     if (
-      (currency1 !== prevState.currency1 ||
-        currency2 !== prevState.currency2) &&
-      currencies[`${currency1}`] &&
-      currencies[`${currency2}`]
+      currency1 !== prevState.currency1 ||
+      currency2 !== prevState.currency2
     ) {
-      const ratesFor1 = getRatesForCurrency(ratesForUSD, currency1);
-      const ratesFor2 = getRatesForCurrency(ratesForUSD, currency2);
-      const amount2 = ratesFor1[`${currency2}`];
-      this.setState({ ratesFor1, ratesFor2, amount1: 1, amount2 });
+      if (
+        currencies &&
+        ratesForUSD &&
+        currencies.hasOwnProperty(currency1) &&
+        currencies.hasOwnProperty(currency2)
+      ) {
+        const ratesFor1 = getRatesForCurrency(ratesForUSD, currency1);
+        const ratesFor2 = getRatesForCurrency(ratesForUSD, currency2);
+        const amount2 = ratesFor1[`${currency2}`];
+        this.setState({ ratesFor1, ratesFor2, amount1: 1, amount2 });
+      } else if (prevState.amount1 !== 0)
+        this.setState({ amount1: 0, amount2: 0 });
     }
   }
 
@@ -43,7 +50,7 @@ class App extends Component {
     });
   };
 
-  handleChangeFrom = e => {
+  handleChangeAmount = e => {
     const { currency1, currency2, ratesFor1, ratesFor2 } = this.state;
     const direction = e.currentTarget.id;
     const value = e.currentTarget.value;
@@ -65,15 +72,11 @@ class App extends Component {
           currencies={currencies}
           onChange={this.handleChangeCurrency}
         />
-        {currencies[`${currency1}`] && currencies[`${currency2}`] && (
-          <Convert
-            amount1={amount1}
-            amount2={amount2}
-            currency1={currency1}
-            currency2={currency2}
-            onChange={this.handleChangeFrom}
-          />
-        )}
+        <Convert
+          amount1={amount1}
+          amount2={amount2}
+          onChange={this.handleChangeAmount}
+        />
       </div>
     );
   }

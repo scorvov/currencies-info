@@ -3,9 +3,13 @@ import { Datalist } from "../common/datalist";
 import React from "react";
 
 export const Header = ({ currency1, currency2, onChange, currencies }) => {
-  const currenciesFiltered = Object.entries(currencies).filter(
-    item => item[0] !== ![currency2, currency1].includes(item[0])
-  );
+  let datalist;
+  if (currencies) {
+    const currenciesFiltered = Object.entries(currencies).filter(
+      item => item[0] !== ![currency2, currency1].includes(item[0])
+    );
+    datalist = <Datalist currencies={currenciesFiltered} />;
+  }
   return (
     <div className={"app-header"}>
       <Input
@@ -20,7 +24,7 @@ export const Header = ({ currency1, currency2, onChange, currencies }) => {
         value={currency2}
         onChange={onChange}
       />
-      <Datalist currencies={currenciesFiltered} />
+      {datalist}
     </div>
   );
 };

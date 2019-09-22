@@ -1,4 +1,5 @@
 import axios from "axios";
+import {handleErrors} from "../utils/helpers";
 
 const instance = axios.create({
   baseURL: "https://openexchangerates.org/api/"
@@ -6,11 +7,17 @@ const instance = axios.create({
 
 export const apiService = {
   getCurrencies() {
-    return instance.get(`/currencies.json`).then(response => response.data);
+    return instance.get(`/currencies.json`).then(response => response.data)
+        .catch(res => console.log(res));
   },
   getRates() {
     return instance
-      .get(`/latest.json?app_id=28e2bf2258fc4ee2afa8432fd82122f0`)
-      .then(response => response.data.rates);
+      .get(`/latest.json`,{
+        params: {
+            app_id: "28e2bf2258fc4ee2afa8432fd82122f0"
+        }
+      })
+      .then(response => response.data.rates)
+        .catch(handleErrors);
   }
 };

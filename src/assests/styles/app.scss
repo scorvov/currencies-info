@@ -2,17 +2,17 @@
 @import '_myVariables';
 
 body {
-  background: $background-app;
+  background: $background-body;
 }
+
 * {
   text-transform: none;
   border: 0;
   padding: 0;
   margin: 0;
-  color: $text-color;
+  //color: $text-color;
   box-sizing: border-box;
 }
-
 .app {
   max-width: 960px;
   min-width: 360px;
@@ -20,36 +20,25 @@ body {
   margin-left: auto;
   margin-right: auto;
   padding: 35px;
-  background: #fff73d;
   border-radius: 10px;
+  background: $background-app;
+  border: 1px solid grey;
 }
-
 .title {
   text-align: center;
 }
 .app-header {
+  @extend %container;
   margin-top: 30px;
   max-height: 100px;
   margin-bottom: 5px;
-  padding: 10px;
-  border: 1px solid $text-color;
-  border-radius: 5px;
-  display: flex;
-  justify-content: center;
   align-items: center;
 }
-
 .convert {
-  max-height: 100px;
-  padding: 0 10px;
-  border: 1px solid $text-color;
-  border-radius: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+ @extend %container;
 }
 
-.input-group{
+.input-group {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
@@ -58,8 +47,23 @@ body {
   &_label {
     width: 120px;
     font-weight: bold;
+    margin-bottom: 4px;
   }
   &_input {
-    @extend %input;
+    padding: $padding-input;
+    border: 1px solid #E0E0E0;
+    border-radius: 4px;
+    height: 32px;
+    opacity: 0.8;
+    font-size: $text-input-size;
+    outline: none;
+    width: 100%;
+    max-width: 250px;
+  }
+  &_input::-webkit-calendar-picker-indicator {
+    display: none;
+  }
+  &_input[name='currencies']{
+    width: 150px;
   }
 }
