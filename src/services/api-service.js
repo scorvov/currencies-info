@@ -8,7 +8,7 @@ const instance = axios.create({
 export const apiService = {
   getCurrencies() {
     return instance.get(`/currencies.json`).then(response => response.data)
-        .catch(res => console.log(res));
+        .catch(handleErrors);
   },
   getRates() {
     return instance

@@ -12,8 +12,8 @@ export const abbreviationCurrency = currency => {
 
 export const handleErrors = (err) => {
   if(err.response) {
-    console.log("Response error ", err.response.status);
+    console.log("Problem with response ", err.response.status);
   } else if (err.request) {
-    console.log("The request failed");
-  } else console.log('Error', err.message)
+    console.log("Problem with request ", err.message);
+  } else console.log('unidentified error', err.message)
 };

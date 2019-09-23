@@ -1,26 +1,28 @@
-import { Input } from "../common/input";
+import { Input } from "./common/input";
 import React from "react";
 
 export const Convert = ({
   amount1,
   amount2,
-  onChange
+    ...props
 }) => {
   return (
     <div className={"convert"}>
       <Input
         label={'Amount:'}
+        min={0}
         type="number"
         id={"amount1"}
         value={amount1}
-        onChange={onChange}
+        {...props}
       />
       <Input
         label={'Amount:'}
+        min={0}
         type="number"
         id={"amount2"}
         value={amount2}
-        onChange={onChange}
+        {...props}
       />
     </div>
   );
