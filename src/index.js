@@ -1,11 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./components/app";
-import { ErrorBoundary } from "./components/error-boundary";
+import { ErrorBoundary } from "./components/common/error-boundary";
+import { Provider } from "react-redux";
+import {AppContainer as App} from "./components/app";
+import {store} from "./store/store";
 
 ReactDOM.render(
-  <ErrorBoundary>
-    <App />
-  </ErrorBoundary>,
+  <Provider store={store}>
+    <ErrorBoundary>
+      <App />
+    </ErrorBoundary>
+  </Provider>,
   document.getElementById("root")
 );

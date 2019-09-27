@@ -1,0 +1,15 @@
+export const SET_CURRENCIES_OFFICIAL = "SET_CURRENCIES_OFFICIAL";
+export const SET_RATES = "SET_RATES";
+export const HANDLE_CURRENCIES = "HANDLE_CURRENCIES";
+export const HANDLE_AMOUNTS = "HANDLE_AMOUNTS";
+
+
+
+
+
+
+
+
+
+
+
